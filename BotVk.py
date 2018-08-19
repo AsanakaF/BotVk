@@ -80,9 +80,9 @@ class VkBot:
                     elif body.lower() == "арты 2017":
                         self.vk.method("messages.send", {"peer_id": id, "message": "2017", "attachment": art2017})
                     elif body.lower() == "хочу арт":
-                        self.vk.method("messages.send", {"peer_id": id, "message": "Портрет (200 р) \n \n"
-                                                                                   "По пояс (500 р) \n \n"
-                                                                                   "В полный рост (700 р) \n \n"
+                        self.vk.method("messages.send", {"peer_id": id, "message": "Портрет (200 р) \n"
+                                                                                   "По пояс (500 р) \n"
+                                                                                   "В полный рост (700 р) \n"
                                                                                 "Чтобы выбрать нажми на 'Портрет'/'По пояс'/'В полный рост'", "keyboard": keyboard})
                     elif body.lower() == "портрет":
                         self.vk.method("messages.send", {"peer_id": id, "message": "Вы заказали портрет. Стоимость 200 рублей. Дождитесь пока я свяжусь с вами."})
