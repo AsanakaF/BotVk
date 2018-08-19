@@ -1,10 +1,10 @@
 import vk_api
 import time
-
+import json
 
 class VkBot:
     def bot(self):
-        token = "..."
+        token = "fa804c84d0f722ec41819722652f0aceed51cf5ad2e3bc14f016a8a8090dd44bc95467328eb9c2d1e74c0"
         self.vk = vk_api.VkApi(token=token)
         self.vk._auth_token()
         art2012 = "photo-59224384_395098605,photo-59224384_395098420,photo-59224384_395098427," \
@@ -28,7 +28,32 @@ class VkBot:
                                         "message": "Привет, здесь ты можешь узнать какие арты я рисовала в 2012-2017 году, "
                                                    "для этого напиши например: 'арты 2012' (можно написать любой год от 2012 до 2017), "
                                                    "и я вышлю тебе рисунки за этот год. Также ты можешь заказать здесь рисунок, "
-                                                   "для этого напиши 'хочу арт', после чего появится несколько вариантов."})
+                                                   "для этого напиши 'хочу арт', после чего появится клавиатура, и вы сможете выбрать интересующий вас вариант."})
+
+        def get_button(label, color, payload=""):
+            return {
+                "action": {
+                    "type": "text",
+                    "payload": json.dumps(payload),
+                    "label": label
+                },
+                "color": color
+            }
+
+        keyboard = {
+            "one_time": False,
+            "buttons": [
+
+                [get_button(label="Портрет", color="default")],
+                [get_button(label="По пояс", color="default")],
+                [get_button(label="В полный рост", color="default")]
+
+
+            ]
+        }
+
+        keyboard = json.dumps(keyboard, ensure_ascii=False).encode('utf-8')
+        keyboard = str(keyboard.decode('utf-8'))
 
 
         while True:
@@ -55,10 +80,10 @@ class VkBot:
                     elif body.lower() == "арты 2017":
                         self.vk.method("messages.send", {"peer_id": id, "message": "2017", "attachment": art2017})
                     elif body.lower() == "хочу арт":
-                        self.vk.method("messages.send", {"peer_id": id, "message": "Портрет (200 р)"
-                                                                                   "По пояс (500 р)"
-                                                                                   "В полный рост (700 р)"
-                                                                                "Чтобы выбрать напиши 'Портрет'/'По пояс'/'В полный рост'"})
+                        self.vk.method("messages.send", {"peer_id": id, "message": "Портрет (200 р) \n \n"
+                                                                                   "По пояс (500 р) \n \n"
+                                                                                   "В полный рост (700 р) \n \n"
+                                                                                "Чтобы выбрать нажми на 'Портрет'/'По пояс'/'В полный рост'", "keyboard": keyboard})
                     elif body.lower() == "портрет":
                         self.vk.method("messages.send", {"peer_id": id, "message": "Вы заказали портрет. Стоимость 200 рублей. Дождитесь пока я свяжусь с вами."})
                     elif body.lower() == "по пояс":
