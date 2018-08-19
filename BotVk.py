@@ -25,28 +25,28 @@ class VkBot:
         def command():
 
             self.vk.method("messages.send", {"peer_id": id,
-                                        "message": "Привет, здесь ты можешь узнать какие арты я рисовала в 2012-2017 году, "
-                                                   "для этого напиши например: 'арты 2012' (можно написать любой год от 2012 до 2017), "
-                                                   "и я вышлю тебе рисунки за этот год. Также ты можешь заказать здесь рисунок, "
-                                                   "для этого напиши 'хочу арт', после чего появится клавиатура, и вы сможете выбрать интересующий вас вариант."})
+                                        "message": "Привет, здесь вы можете узнать какие арты я рисовала в 2012-2017 году, "
+                                                   "для этого напишите например: 'арты 2012' (можно написать любой год от 2012 до 2017), "
+                                                   "и я вышлю рисунки за этот год. Также можно заказать здесь рисунок, "
+                                                   "для этого напишите 'хочу арт', после чего появится клавиатура, и вы сможете выбрать интересующий вас вариант."})
 
-        def get_button(label, color, payload=""):
+        def get_button(label, payload=""):
             return {
                 "action": {
                     "type": "text",
                     "payload": json.dumps(payload),
                     "label": label
-                },
-                "color": color
-            }
+                }}
+
+
 
         keyboard = {
             "one_time": False,
             "buttons": [
 
-                [get_button(label="Портрет", color="default")],
-                [get_button(label="По пояс", color="default")],
-                [get_button(label="В полный рост", color="default")]
+                [get_button(label="Портрет")],
+                [get_button(label="По пояс")],
+                [get_button(label="В полный рост")]
 
 
             ]
@@ -91,7 +91,7 @@ class VkBot:
                     elif body.lower() == "в полный рост":
                         self.vk.method("messages.send", {"peer_id": id, "message": "Вы заказали арт в полный рост. Стоимость 700 рублей. Дождитесь пока я свяжусь с вами."})
                     else:
-                        self.vk.method("messages.send", {"peer_id": id, "message": "Я тебя не понимаю"})
+                        self.vk.method("messages.send", {"peer_id": id, "message": "Я вас не понимаю. Напишите 'привет' или 'команды'"})
             except Exception as E:
                 time.sleep(1)
 
