@@ -4,7 +4,7 @@ import time
 
 class VkBot:
     def bot(self):
-        token = "fa804c84d0f722ec41819722652f0aceed51cf5ad2e3bc14f016a8a8090dd44bc95467328eb9c2d1e74c0"
+        token = "fa804c84d0f722ec41819722652f0aceed51cf5ad2e3bc14f016a8a8090dd44bc95467328eb9c2d1e0000"
         self.vk = vk_api.VkApi(token=token)
         self.vk._auth_token()
 
